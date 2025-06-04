@@ -10,6 +10,9 @@ from users.permissions import IsAuthor
 
 
 class AdViewSet(ModelViewSet):
+    """
+    CRUD объявлений
+    """
     queryset = Ad.objects.all().order_by('-created_at')
     serializer_class = AdSerializer
     filter_backends = [SearchFilter]
@@ -31,6 +34,9 @@ class AdViewSet(ModelViewSet):
 
 
 class AdListAPIView(generics.ListAPIView):
+    """
+        Контроллер для вывода списка объявлений
+    """
     serializer_class = AdSerializer
     permission_classes = [AllowAny]
     pagination_class = AdPagination
@@ -38,5 +44,8 @@ class AdListAPIView(generics.ListAPIView):
 
 
 class ReviewViewSet(ModelViewSet):
+    """
+        CRUD комментариев
+    """
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
