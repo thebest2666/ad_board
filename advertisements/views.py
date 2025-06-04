@@ -1,6 +1,6 @@
-from rest_framework import permissions
+from rest_framework import permissions, generics
 from rest_framework.filters import SearchFilter
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.viewsets import ModelViewSet
 
 from advertisements.models import Ad, Review
@@ -25,11 +25,15 @@ class AdViewSet(ModelViewSet):
         ad.save()
 
     def get_permissions(self):
-        if self.action in ('list', 'retrieve'):
-            return [permissions.AllowAny()]
         if self.action in ('create', 'list', 'retrieve', 'update', 'destroy'):
             self.permission_classes = [IsAuthor], [IsAdminUser]
         return super().get_permissions()
+
+
+class AdListAPIView(generics.ListAPIView):
+    serializer_class = AdSerializer
+    permission_classes = [AllowAny]
+    pagination_class = AdPagination
 
 
 
