@@ -37,6 +37,7 @@ class AdListAPIView(generics.ListAPIView):
     """
         Контроллер для вывода списка объявлений
     """
+    queryset = Ad.objects.all()
     serializer_class = AdSerializer
     permission_classes = [AllowAny]
     pagination_class = AdPagination
