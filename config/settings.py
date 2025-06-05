@@ -126,3 +126,5 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+SWAGGER_USE_COMPAT_RENDERERS = False
